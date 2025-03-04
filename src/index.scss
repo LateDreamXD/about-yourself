@@ -1,0 +1,284 @@
+/**
+ * aboutYourself styleSheet
+ * @author LateDream
+ */
+@charset 'utf-8';
+@use './animations.scss';
+
+@font-face {
+	font-family: 'ZCool Happy 2020';
+	font-display: swap;
+	src: local('站酷快乐体'),
+		 url('./assets/zcoolhappy2020.woff2') format('woff2');
+}
+
+:root {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+	interpolate-size: allow-keywords;
+}
+
+::selection {
+	background-color: #ff05;
+}
+
+a:not([role="button"]) {
+	padding: 0.2em;
+	color: #00bfff;
+	text-decoration: none;
+	transition: background-color 0.3s ease, border-radius 0.3s ease;
+	&:hover {
+		border-radius: 0.4em;
+		background-color: #00bfff70;
+	}
+}
+
+body {
+	margin: 0;
+}
+
+#app {
+	width: 100%;
+}
+
+#main {
+	position: fixed;
+	width: 50%;
+	top: 30%;
+	left: 25%;
+	transition: all 0.5s ease;
+	&.maximized {
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		& .window-body {
+			// 不知道为什么 100% 的过渡效果很怪
+			// height: 100%;
+			height: 100vh;
+		}
+	}
+	&.minimized {
+		width: 12%;
+		top: 96%;
+		left: 100px;
+		& .title {display: none;}
+		& .window-body {display: none;}
+	}
+	& .dev {
+		animation: rainbow 5s linear infinite;
+	}
+	& .socials {
+		grid-area: socials;
+		height: fit-content;
+		display: flex;
+		justify-content: space-between;
+		& a {
+			text-shadow: 0 0 2px #000;
+			transition: transform 0.4s ease;
+			&:hover {
+				transform: rotate(360deg);
+			}
+		}
+		& .platform {
+			width: 24px;
+			height: 24px;
+		}
+	}
+}
+
+#bg-color {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
+#bg-video, #bg-image {
+	position: fixed;
+	top: 0;
+	left: 0;
+	object-fit: fill;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+#header {
+	width: 100%;
+	height: 6vh;
+}
+
+.actions {
+	display: inline-flex;
+	& .icon {
+		width: 24px;
+		height: 24px;
+	}
+	& a {
+		color: #fff;
+		outline: none !important;
+		transition: color 0.5s ease;
+		margin-left: 0.4em;
+		&:hover {
+			color: #fff9;
+		}
+		&.danger:hover {
+			color: #f00;
+		}
+	}
+	& .not-allowed {
+		color: gray !important;
+		cursor: not-allowed !important;
+	}
+}
+.window-title {
+	display: inline-flex;
+	// align-items: baseline;
+	-webkit-user-select: none;
+	user-select: none;
+}
+.window-header {
+	color: #fff;
+	border-radius: 10px 10px 0 0;
+	background-color: #000;
+	padding: 0.6em;
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+}
+.window-body {
+	padding: 2em;
+	border-radius: 0 0 10px 10px;
+	background-color: var(--bg-color);
+	display: grid;
+	grid-template-columns: 120px 25% 45%;
+	grid-template-rows: 0fr;
+	grid-template-areas: 'avatar name socials'
+						 'avatar sign sign'
+						 'footer footer footer';
+	column-gap: 1em;
+	transition: height 0.5s ease;
+	& .avatar {
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		grid-area: avatar;
+		transition: transform 0.4s ease;
+		&:hover {
+			transform: rotate(360deg);
+		}
+	}
+	& .name {
+		grid-area: name;
+		&>span.aka {
+			color: #aaa;
+			background-color: #0006;
+			font-size: 75%;
+			margin-left: 0.2em;
+			font-family: 'Comic Sans MS';
+			&::after {
+				content: ' -';
+			}
+			&::before {
+				content: '- ';
+			}
+		}
+	}
+	& .sign {
+		font-family: 'ZCool Happy 2020';
+		padding: 1em;
+		border-radius: 0 0.4em 0.4em;
+		background-color: #00bfff66;
+		width: 100%;
+		height: fit-content;
+		grid-area: sign;
+		position: relative;
+		&::before {
+			content: '';
+			display: block;
+			position: absolute;
+			border-width: 8px;
+			border-style: dashed solid dashed dashed;
+			border-color: transparent rgba(0, 191, 255, 0.4) transparent transparent;
+			left: -16px;
+			top: 0;
+		}
+		&>* {
+			font-family: inherit;
+		}
+		& .content {
+			width: fit-content; height: 1em;
+			word-break: break-all;
+			border-right: 2px solid transparent;
+			animation: typing 3s steps(25, end), blink 0.6s step-end infinite;
+			overflow: hidden;
+		}
+		& .tags {
+			margin-block: 0;
+			color: #b6b6da;
+		}
+	}
+}
+.footer {
+	grid-area: footer;
+	font-size: 0.75em;
+	& .content {
+		display: flex;
+		flex-direction: column;
+	}
+}
+.icon {
+	width: 24px;
+	height: 24px;
+	font-size: 24px;
+}
+
+@media screen and (max-width: 768px) {
+	// 手机端样式
+	#bg-video, #bg-image {
+		left: -240%;
+		width: initial;
+	}
+	#main {
+		width: 100vw;
+		left: 0;
+		top: 20%;
+	}
+	.window-header {
+		display: none;
+	}
+	.window-body {
+		border-radius: 0;
+		grid-template-columns: 60px 70%;
+		grid-template-rows: 60px 40% 5% 20%;
+		grid-template-areas: 'avatar name'
+							 'sign sign'
+							 'socials socials'
+							 'footer footer';
+		row-gap: 1em;
+		& .avatar {
+			width: 60px;
+			height: 60px;
+		}
+		& .name {
+			font-size: 1.2em;
+			margin-top: 1em;
+		}
+		& .sign {
+			font-size: 1rem;
+			&::before {
+				transform: rotate(90deg);
+				top: -16px;
+				left: 0;
+			}
+		}
+	}
+	.socials {
+		justify-items: center;
+	}
+	/* .footer {
+		font-size: 0.7em;
+	} */
+}
