@@ -36,7 +36,7 @@ declare type Social = {
  * @param debug 调试模式
  * @param checkUpdate 是否检查更新
  */
-export declare type aYsConfig = {
+declare type aYsConfig = {
 	[key: string]: any;
 	// 主要信息
 	avatar: string;
@@ -48,6 +48,7 @@ export declare type aYsConfig = {
 	footers?: string[];
 	// 主题配置
 	window: {
+		bubbleColor: string;
 		headerColor: string;
 		bodyColor: string;
 	};
@@ -62,6 +63,22 @@ export declare type aYsConfig = {
 		video?: string;
 	};
 	enableFontAwesome: boolean;
+	moeCounter: {
+		enable: boolean;
+		alt?: string;
+		name: string;
+		theme?: string;
+		padding?: number;
+		offset?: number;
+		scale?: number;
+		align?: 'top' | 'center' | 'bottom';
+		pixelated?: '0' | '1';
+		darkmode?: '0' | '1' | 'auto';
+		unusual?: {
+			num?: number;
+			prefix?: number | '';
+		}
+	};
 	injectContent?: {
 		head?: any[];
 		body?: any[];
@@ -69,3 +86,12 @@ export declare type aYsConfig = {
 	debug: boolean;
 	checkUpdate: boolean;
 }
+
+declare global {
+	namespace aYs {
+		interface Config extends aYsConfig {}
+		type Social<Social> = {}
+	}
+}
+
+export {}

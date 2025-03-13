@@ -1,6 +1,4 @@
-import type {aYsConfig} from './types/ays';
-
-export default<aYsConfig> {
+export default<aYs.Config> {
 	// 主要信息
 	avatar: 'assets/statics/avatar.svg',
 	name: '我',
@@ -24,6 +22,7 @@ export default<aYsConfig> {
 	],
 	// 主题主要配置
 	window: {
+		bubbleColor: '#00000044',
 		headerColor: '#ff149374',
 		bodyColor: '#ff1493cc'
 	},
@@ -32,11 +31,16 @@ export default<aYsConfig> {
 		// 视频背景元素 `#bg-video` 图片背景元素 `#bg-image`
 		type: 'gradient',
 		gradient: {
-			colors: ['#aa55ff', '#00bbff', '#4422ff', '#11ccff'],
+			colors: ['#ff1493', '#ffbb00', '#ff5733', '#ff1493'],
 			direction: 'to bottom right'
 		}
 	},
 	enableFontAwesome: true,
+	moeCounter: {
+		enable: true,
+		alt: 'Moe Counter!',
+		name: 'index'
+	},
 	injectContent: {
 		head: [],
 		body: []

@@ -1,7 +1,20 @@
 <script lang="ts" setup>
 import {ref, onMounted} from 'vue';
 import aysConfig from '../ays.config';
-const {avatar, name, aka, sign, tags, socials, footers} = aysConfig;
+const {avatar, name, aka, sign, tags, socials, footers, moeCounter} = aysConfig;
+let moeSrc = ref(`https://count.getloli.com/@${moeCounter.name}?name=${moeCounter.name}`);
+moeCounter.align && (moeSrc.value += `&align=${moeCounter.align}`);
+moeCounter.alt && (moeCounter.alt = moeCounter.alt) || (moeCounter.alt = moeCounter.name);
+moeCounter.darkmode && (moeSrc.value += `&darkmode=${moeCounter.darkmode}`);
+moeCounter.offset && (moeSrc.value += `&offset=${moeCounter.offset}`);
+moeCounter.padding && (moeSrc.value += `&padding=${moeCounter.padding}`);
+moeCounter.pixelated && (moeSrc.value += `&pixelated=${moeCounter.pixelated}`);
+moeCounter.scale && (moeSrc.value += `&scale=${moeCounter.scale}`);
+moeCounter.theme && (moeSrc.value += `&theme=${moeCounter.theme}`);
+if(moeCounter.unusual) {
+	moeCounter.unusual.num && (moeSrc.value += `&num=${moeCounter.unusual.num}`);
+	moeCounter.unusual.prefix && (moeSrc.value += `&prefix=${moeCounter.unusual.prefix}`);
+}
 
 const minimized = ref(false);
 function minimize() {
@@ -21,10 +34,6 @@ onMounted(() => {
 	aysConfig.injectContent?.head?.forEach(content => document.head.insertAdjacentHTML('beforeend', content));
 	aysConfig.injectContent?.body?.forEach(content => document.body.insertAdjacentHTML('beforeend', content));
 
-	// 移动端默认全屏
-	if (window.innerWidth <= 768)
-		maximize();
-
 	console.log(`%c aboutYourself v${___ays_ver} %c https://github.com/LateDreamXD/about-yourself `, "color: #ff1493; background: #030307; padding:5px 0;", "background: #ff1493; padding:5px 0;");
 });
 </script>
@@ -36,7 +45,7 @@ onMounted(() => {
 	<div v-else id="bg-color" :style="{background: `linear-gradient(${aysConfig.background?.gradient?.direction}, ${aysConfig.background?.gradient?.colors.join(',')})`}"></div>
 
 	<div id="main">
-		<div class="window-header" :style="{backgroundColor: aysConfig.window.headerColor}">
+		<div class="window-header" :style="`--bg-color: ${aysConfig.window.headerColor};`">
 			<span class="window-title">
 				<img :src="avatar" alt="icon" class="icon avatar" draggable="false" style="margin-right: 0.2em;" />
 				<span class="title">关于 {{name}} <span v-if="aysConfig.debug" class="dev">Debug</span></span>
@@ -55,7 +64,7 @@ onMounted(() => {
 				</a>
 			</div>
 		</div>
-		<div class="window-body" :style="{backgroundColor: aysConfig.window.bodyColor}">
+		<div class="window-body" :style="`--bg-color: ${aysConfig.window.bodyColor};`">
 			<img class="avatar" :alt="name" :title="name" :src="avatar" />
 			<div class="name">{{name}}<span class="aka">{{aka}}</span></div>
 			<div class="socials">
@@ -64,7 +73,7 @@ onMounted(() => {
 					<i v-else="item.iconType !== 'img'" :class="`icon ${item.iconType} fa-${item.icon}`" :style="{color: item.iconColor}"></i>
 				</a>
 			</div>
-			<div class="sign">
+			<div class="sign" :style="`--bg-color: ${aysConfig.window.bubbleColor};`">
 				<p class="content">{{sign}}</p>
 				<p class="tags" v-text="tags.map(tag => `#${tag}`).join(' ')"></p>
 			</div>
@@ -73,6 +82,7 @@ onMounted(() => {
 					<span v-for="item in footers" v-html="item.replaceHolder()"></span>
 				</p>
 			</div>
+			<img v-if="moeCounter.enable" id="moe-counter" :src="moeSrc" />
 		</div>
 	</div>
 </template>

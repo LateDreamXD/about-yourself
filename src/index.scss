@@ -153,12 +153,13 @@ body {
 	border-radius: 0 0 10px 10px;
 	background-color: var(--bg-color);
 	display: grid;
-	grid-template-columns: 120px 25% 45%;
+	grid-template-columns: 125px 25% 45%;
 	grid-template-rows: 0fr;
 	grid-template-areas: 'avatar name socials'
 						 'avatar sign sign'
-						 'footer footer footer';
+						 'footer moe moe';
 	column-gap: 1em;
+	row-gap: 0.6em;
 	transition: height 0.5s ease;
 	& .avatar {
 		width: 120px;
@@ -190,7 +191,7 @@ body {
 		font-family: 'ZCool Happy 2020';
 		padding: 1em;
 		border-radius: 0 0.4em 0.4em;
-		background-color: #00bfff66;
+		background-color: var(--bg-color);
 		width: 100%;
 		height: fit-content;
 		grid-area: sign;
@@ -201,7 +202,7 @@ body {
 			position: absolute;
 			border-width: 8px;
 			border-style: dashed solid dashed dashed;
-			border-color: transparent rgba(0, 191, 255, 0.4) transparent transparent;
+			border-color: transparent var(--bg-color) transparent transparent;
 			left: -16px;
 			top: 0;
 		}
@@ -219,6 +220,9 @@ body {
 			margin-block: 0;
 			color: #b6b6da;
 		}
+	}
+	& #moe-counter {
+		grid-area: moe;
 	}
 }
 .footer {
@@ -244,19 +248,22 @@ body {
 	#main {
 		width: 100vw;
 		left: 0;
-		top: 20%;
+		top: 0;
 	}
 	.window-header {
 		display: none;
 	}
 	.window-body {
+		background-color: transparent;
 		border-radius: 0;
+		height: max-content;
 		grid-template-columns: 60px 70%;
 		grid-template-rows: 60px 40% 5% 20%;
 		grid-template-areas: 'avatar name'
 							 'sign sign'
 							 'socials socials'
-							 'footer footer';
+							 'footer footer'
+							 'moe moe';
 		row-gap: 1em;
 		& .avatar {
 			width: 60px;
@@ -267,7 +274,7 @@ body {
 			margin-top: 1em;
 		}
 		& .sign {
-			font-size: 1rem;
+			font-size: 0.8rem;
 			&::before {
 				transform: rotate(90deg);
 				top: -16px;
