@@ -2,19 +2,12 @@
 import {ref, onMounted} from 'vue';
 import aysConfig from '../ays.config';
 const {avatar, name, aka, sign, tags, socials, footers, moeCounter} = aysConfig;
-let moeSrc = ref(`https://count.getloli.com/@${moeCounter.name}?name=${moeCounter.name}`);
-moeCounter.align && (moeSrc.value += `&align=${moeCounter.align}`);
-moeCounter.alt && (moeCounter.alt = moeCounter.alt) || (moeCounter.alt = moeCounter.name);
-moeCounter.darkmode && (moeSrc.value += `&darkmode=${moeCounter.darkmode}`);
-moeCounter.offset && (moeSrc.value += `&offset=${moeCounter.offset}`);
-moeCounter.padding && (moeSrc.value += `&padding=${moeCounter.padding}`);
-moeCounter.pixelated && (moeSrc.value += `&pixelated=${moeCounter.pixelated}`);
-moeCounter.scale && (moeSrc.value += `&scale=${moeCounter.scale}`);
-moeCounter.theme && (moeSrc.value += `&theme=${moeCounter.theme}`);
-if(moeCounter.unusual) {
-	moeCounter.unusual.num && (moeSrc.value += `&num=${moeCounter.unusual.num}`);
-	moeCounter.unusual.prefix && (moeSrc.value += `&prefix=${moeCounter.unusual.prefix}`);
-}
+const {window: aysWindow} = aysConfig;
+const moeSrc = ref(`https://count.getloli.com/@${moeCounter.name}?name=${moeCounter.name}`);
+const winStyle = ref('');
+
+import('./modules/ays/moe').then(module => module.default(moeCounter, moeSrc));
+import('./modules/ays/parseWindow').then(module => module.default(aysWindow, winStyle));
 
 const minimized = ref(false);
 function minimize() {
@@ -44,7 +37,7 @@ onMounted(() => {
 	<div v-else-if="aysConfig.background?.type === 'color'" id="bg-color" :style="{ backgroundColor: aysConfig.background?.color }"></div>
 	<div v-else id="bg-color" :style="{background: `linear-gradient(${aysConfig.background?.gradient?.direction}, ${aysConfig.background?.gradient?.colors.join(',')})`}"></div>
 
-	<div id="main">
+	<div id="main" :style="winStyle">
 		<div class="window-header" :style="`--bg-color: ${aysConfig.window.headerColor};`">
 			<span class="window-title">
 				<img :src="avatar" alt="icon" class="icon avatar" draggable="false" style="margin-right: 0.2em;" />
@@ -74,7 +67,7 @@ onMounted(() => {
 				</a>
 			</div>
 			<div class="sign" :style="`--bg-color: ${aysConfig.window.bubbleColor};`">
-				<p class="content">{{sign}}</p>
+				<p class="content" :style="`--ays-sign-length: ${sign.countLength()}.1em;--ays-sign-length-typing: ${sign.countLength()*2};`">{{sign}}</p>
 				<p class="tags" v-text="tags.map(tag => `#${tag}`).join(' ')"></p>
 			</div>
 			<div class="footer">
