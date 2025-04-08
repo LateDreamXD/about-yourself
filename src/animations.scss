@@ -16,7 +16,7 @@
 
 @keyframes typing {
 	from {width: 0;}
-	to {width: fit-content;}
+	to {width: var(--ays-sign-length);}
 }
 @keyframes blink {
 	from, to {border-color: transparent;}
