@@ -1,22 +1,7 @@
-/**
- * 单个社交平台信息
- * @param _show 是否显示(默认显示)
- * @param platform 平台名称
- * @param icon 图标
- * @param iconColor 图标颜色
- * @param iconType 图标类型 (img, fab, fas)
- * @param username 用户名/悬停文字
- * @param url 链接
- */
-declare type Social = {
-	_show?: boolean;
-	platform: string;
-	icon: string;
-	iconColor?: string;
-	iconType: 'img' | 'fab' | 'fas';
-	username: string;
-	url: string;
-}
+import { Social } from './cfgs/socials';
+import { aysWindow } from './views/window';
+import { Background } from './views/background';
+import { moeCounter } from './views/moeCounter';
 
 /**
  * 配置信息
@@ -47,38 +32,10 @@ declare type aYsConfig = {
 	socials: Social[];
 	footers?: string[];
 	// 主题配置
-	window: {
-		bubbleColor: string;
-		headerColor: string;
-		bodyColor: string;
-	};
-	background?: {
-		type: 'color' | 'gradient' | 'image' | 'video';
-		color?: string;
-		gradient?: {
-			colors: string[];
-			direction: 'to right' | 'to bottom' | 'to bottom right' | 'to bottom left' | 'to top' | 'to top right' | 'to top left';
-		};
-		image?: string;
-		video?: string;
-	};
+	window: aysWindow;
+	background?: Background;
 	enableFontAwesome: boolean;
-	moeCounter: {
-		enable: boolean;
-		alt?: string;
-		name: string;
-		theme?: string;
-		padding?: number;
-		offset?: number;
-		scale?: number;
-		align?: 'top' | 'center' | 'bottom';
-		pixelated?: '0' | '1';
-		darkmode?: '0' | '1' | 'auto';
-		unusual?: {
-			num?: number;
-			prefix?: number | '';
-		}
-	};
+	moeCounter: moeCounter;
 	injectContent?: {
 		head?: any[];
 		body?: any[];
@@ -90,7 +47,6 @@ declare type aYsConfig = {
 declare global {
 	namespace aYs {
 		interface Config extends aYsConfig {}
-		type Social<Social> = {}
 	}
 }
 
