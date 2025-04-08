@@ -1,6 +1,6 @@
 export default<aYs.Config> {
 	// 主要信息
-	avatar: 'assets/statics/avatar.svg',
+	avatar: 'assets/statics/avatar.min.svg',
 	name: '我',
 	aka: 'Myself',
 	sign: '生活不只是眼前的苟且，还有诗和远方。',
@@ -18,13 +18,17 @@ export default<aYs.Config> {
 	],
 	footers: [
 		'萌ICP备114514号-1',
-		'Copyright (c) 2025 %name%'
+		'Copyright (c) 2025 %name%',
+		'自豪地使用 aboutYourself 主题'
 	],
 	// 主题主要配置
 	window: {
 		bubbleColor: '#00000044',
 		headerColor: '#ff149374',
-		bodyColor: '#ff1493cc'
+		bodyColor: '#ff1493cc',
+		height: undefined,
+		width: 50,
+		position: 'center center',
 	},
 	background: {
 		// 视频和图片背景最好使用横屏内容 否则你需要自己改样式表

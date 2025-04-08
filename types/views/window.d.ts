@@ -1,3 +1,5 @@
+declare type units = 'px' | 'ch' | 'cm' | 'em' | 'ex' | 'in' | 'mm' | 'pc' | 'pt' | 'px' | 'q' | 'rem' | 'vh' | 'vmax' | 'vmin' | 'vw' | '%';
+
 /**
  * 窗口配置
  * @property bubbleColor 气泡颜色
@@ -11,8 +13,10 @@ export declare type aysWindow = {
 	bubbleColor: string;
 	headerColor: string;
 	bodyColor: string;
-	height: string;
-	width: string;
+	height?: number;
+	width?: number;
+	heightUnit?: units;
+	widthUnit?: units;
 	position: 'center center' | 'left top' | 'right top' | 'left bottom' | 'right bottom' |
 		'top center' | 'bottom center' | 'left center' | 'right center';
 };

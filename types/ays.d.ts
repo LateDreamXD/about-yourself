@@ -47,6 +47,9 @@ declare type aYsConfig = {
 declare global {
 	namespace aYs {
 		interface Config extends aYsConfig {}
+		interface Window extends aysWindow {}
+		interface moe extends moeCounter {}
+		interface social extends Social {}
 	}
 }
 
