@@ -1,4 +1,4 @@
-import aysConfig from "../../ays.config";
+import aysConfig from '../../ays.config';
 
 String.prototype.countSymbols = function() {
 	let fullWidthCount = 0, halfWidthCount = 0;
@@ -20,6 +20,7 @@ String.prototype.countLength = function() {
 }
 
 String.prototype.replaceHolder = function() {
-	return this.replace(/%(\w+)%/g, (match: string, key: string) => aysConfig[key]?? undefined)
+	return this.replace(/%(\w+)%/g, (match: string, key: string) =>
+		(aysConfig[key] || (window as any)[key])?? undefined)
 }
 export {}
