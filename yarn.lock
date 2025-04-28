@@ -437,15 +437,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/vue@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@types/vue@npm:2.0.0"
-  dependencies:
-    vue: "npm:*"
-  checksum: 10c0/847df06a6f27101cb8a483e297818267e69c84c179b7a571965cc5e947822c5eaa25abfb5e18ac226e5a95f99c0deb45ad4487d6fecb8c0e7b15e4674efcc2f4
-  languageName: node
-  linkType: hard
-
 "@vitejs/plugin-vue@npm:^5.2.3":
   version: 5.2.3
   resolution: "@vitejs/plugin-vue@npm:5.2.3"
@@ -568,7 +559,6 @@ __metadata:
   resolution: "about-yourself@workspace:."
   dependencies:
     "@types/node": "npm:^22.15.2"
-    "@types/vue": "npm:^2.0.0"
     "@vitejs/plugin-vue": "npm:^5.2.3"
     sass-embedded: "npm:^1.87.0"
     typescript: "npm:^5.8.3"
@@ -1920,7 +1910,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue@npm:*, vue@npm:^3.5.13":
+"vue@npm:^3.5.13":
   version: 3.5.13
   resolution: "vue@npm:3.5.13"
   dependencies:
